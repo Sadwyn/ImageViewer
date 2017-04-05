@@ -44,7 +44,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public static class ImageHolder extends RecyclerView.ViewHolder {
         ImageView leftImage;
-
         public ImageHolder(View itemView) {
             super(itemView);
             leftImage = (ImageView) itemView.findViewById(R.id.leftImage);
@@ -54,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             Glide.with(context).load(images.get(position)
-                    .getSource().getUrl()).placeholder(context.getDrawable(android.R.drawable.progress_horizontal)).
+                    .getSource().getUrl()).placeholder(context.getResources().getDrawable(android.R.drawable.progress_horizontal)).
                     centerCrop().into(((ImageHolder) holder).leftImage);
     }
 

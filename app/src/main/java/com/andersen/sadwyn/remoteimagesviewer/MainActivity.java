@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.andersen.sadwyn.remoteimagesviewer.image.Child;
 import com.andersen.sadwyn.remoteimagesviewer.image.Child_;
@@ -26,9 +28,14 @@ public class MainActivity extends AppCompatActivity implements ImagesRequestCall
     public static final String NEW = "new";
     public static final String TOP = "top";
     public static final String IMAGE = "image";
+
+    public static final String FAILURE = "FAILURE";
+
     ImagesRequestCallback callback;
-    RecyclerView recyclerView;
     Call<Child> call;
+
+    RecyclerView recyclerView;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +43,12 @@ public class MainActivity extends AppCompatActivity implements ImagesRequestCall
         setContentView(R.layout.activity_main);
         callback = this;
         recyclerView = (RecyclerView)findViewById(R.id.recycler);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
         getImagesByParameter(TOP);
     }
 
     private void getImagesByParameter(String parameter) {
+        progressBar.setVisibility(View.VISIBLE);
         call = getCall(parameter);
         call.enqueue(new Callback<Child>() {
             @Override
@@ -54,11 +63,13 @@ public class MainActivity extends AppCompatActivity implements ImagesRequestCall
                     if(dataItem.getPostHint().equals(IMAGE))
                         images.addAll(dataItem.getPreview().getImages());
                     callback.initializeRecyclerView(images);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
             @Override
             public void onFailure(Call<Child> call, Throwable t) {
-                Log.i("FAILURE", t.getMessage());
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -84,12 +95,17 @@ public class MainActivity extends AppCompatActivity implements ImagesRequestCall
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        call.cancel();
+        cancelCall();
     }
 
     @Override
     public void onClick(View v) {
-        call.cancel();
+        cancelCall();
         getImagesByParameter(v.getId() == R.id.newImages ? NEW : TOP);
+    }
+
+    private void cancelCall() {
+        if(call!=null)
+            call.cancel();
     }
 }
