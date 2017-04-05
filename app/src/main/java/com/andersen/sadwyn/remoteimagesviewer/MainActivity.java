@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity implements ImagesRequestCall
     public static final String TOP = "top";
     public static final String IMAGE = "image";
 
-    public static final String FAILURE = "FAILURE";
-
     ImagesRequestCallback callback;
     Call<Child> call;
 
