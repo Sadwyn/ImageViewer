@@ -19,19 +19,23 @@
         android:layout_gravity="bottom">
         <Button
             android:id="@+id/topImages"
-            android:text="Top"
+            android:text="@string/topButtonText"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:onClick="onClick"
-            android:layout_height="wrap_content" />
+            android:layout_marginRight="1dp"
+            android:layout_height="wrap_content"
+            style="?android:buttonStyle"/>
 
         <Button
             android:id="@+id/newImages"
-            android:text="New"
+            android:text="@string/newButtonText"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:onClick="onClick"
-            android:layout_height="wrap_content" />
+            android:layout_marginLeft="1dp"
+            android:layout_height="wrap_content"
+            style="?android:buttonStyle"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RemoteImagesViewer</string>
+    <string name="newButtonText">New</string>
+    <string name="topButtonText">Top</string>
 </resources>
