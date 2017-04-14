@@ -2,12 +2,11 @@ package com.andersen.sadwyn.remoteimagesviewer;
 
 import android.app.Application;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Sadwyn on 03.04.2017.
- */
 
 public class ViewerApplication extends Application {
     private static Api api;
@@ -22,7 +21,9 @@ public class ViewerApplication extends Application {
         super.onCreate();
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.reddit.com/")
-                .addConverterFactory(GsonConverterFactory.create()).build();
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
 
         api = retrofit.create(Api.class);
     }
