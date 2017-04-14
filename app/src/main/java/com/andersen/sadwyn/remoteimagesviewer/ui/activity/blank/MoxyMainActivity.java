@@ -84,8 +84,8 @@ public class MoxyMainActivity extends MvpActivity implements MoxyMainView, View.
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mMoxyMainPresenter.detachView(this);
         mMoxyMainPresenter.onDestroy();
+        mMoxyMainPresenter.detachView(this);
     }
 
 }

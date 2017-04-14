@@ -21,7 +21,6 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.andersen.sadwyn.remoteimagesviewer.ui.activity.blank.MoxyMainActivity.NEW;
-import static com.andersen.sadwyn.remoteimagesviewer.ui.activity.blank.MoxyMainActivity.TOP;
 
 @InjectViewState
 public class MoxyMainPresenter extends MvpPresenter<MoxyMainView> {
