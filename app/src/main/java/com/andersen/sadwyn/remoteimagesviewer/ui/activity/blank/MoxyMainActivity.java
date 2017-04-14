@@ -19,8 +19,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.util.ArrayList;
 
-import io.reactivex.Observable;
-
 public class MoxyMainActivity extends MvpActivity implements MoxyMainView, View.OnClickListener {
     public static final String TAG = "MoxyMainActivity";
     @InjectPresenter
@@ -32,7 +30,6 @@ public class MoxyMainActivity extends MvpActivity implements MoxyMainView, View.
     public static final String NEW = "new";
     public static final String TOP = "top";
 
-    private ArrayList<Image> images = new ArrayList<>();
 
     public static Intent getIntent(final Context context) {
         Intent intent = new Intent(context, MoxyMainActivity.class);
@@ -69,7 +66,6 @@ public class MoxyMainActivity extends MvpActivity implements MoxyMainView, View.
 
     @Override
     public void onNext(ArrayList<Image> images) {
-        this.images.addAll(images);
         progressBar.setVisibility(View.INVISIBLE);
         initializeRecyclerView(images);
     }
@@ -88,8 +84,8 @@ public class MoxyMainActivity extends MvpActivity implements MoxyMainView, View.
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mMoxyMainPresenter.onDestroy();
         mMoxyMainPresenter.detachView(this);
+        mMoxyMainPresenter.onDestroy();
     }
 
 }

@@ -20,6 +20,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.andersen.sadwyn.remoteimagesviewer.ui.activity.blank.MoxyMainActivity.NEW;
 import static com.andersen.sadwyn.remoteimagesviewer.ui.activity.blank.MoxyMainActivity.TOP;
 
 @InjectViewState
@@ -51,6 +52,7 @@ public class MoxyMainPresenter extends MvpPresenter<MoxyMainView> {
         return new DisposableObserver<Child>() {
             @Override
             public void onNext(Child child) {
+                images.clear();
                 List<Data__> data = new ArrayList<>();
                 for (Child_ child_ : child.getData().getChildren())
                     data.add(child_.getData());
@@ -77,7 +79,7 @@ public class MoxyMainPresenter extends MvpPresenter<MoxyMainView> {
     public void attachView(MoxyMainView view) {
         super.attachView(view);
         if(images.isEmpty())
-            getImagesByParameter(TOP);
+            getImagesByParameter(NEW);
     }
 
 }
